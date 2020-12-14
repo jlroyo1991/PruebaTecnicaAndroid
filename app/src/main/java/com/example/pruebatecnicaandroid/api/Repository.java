@@ -1,5 +1,9 @@
 package com.example.pruebatecnicaandroid.api;
 
+import androidx.lifecycle.MutableLiveData;
+
+import com.example.pruebatecnicaandroid.model.PhotoLibrary;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -21,26 +25,34 @@ public class Repository {
         flickrApi = RetrofitService.cteateService(FlickrApi.class);
     }
 
-    public void getCollection(String apiKey, String method, String format, int nojson){
+    public MutableLiveData<PhotoLibrary> getCollection(String apiKey, String method, String format, int nojson, String tags){
 
+        MutableLiveData<PhotoLibrary> photosData = new MutableLiveData<>();
 
-        flickrApi.getPhotoCollection(apiKey, method, format, nojson).enqueue(new Callback<PhotoResponse>() {
+        flickrApi.getPhotoCollection(apiKey, method, format, nojson, tags).enqueue(new Callback<PhotoLibrary>() {
             @Override
-            public void onResponse(Call<PhotoResponse> call,
-                                   Response<PhotoResponse> response) {
+            public void onResponse(Call<PhotoLibrary> call,
+                                   Response<PhotoLibrary> response) {
                 if (response.isSuccessful()){
-                    response.body();
+                    photosData.setValue(response.body());
                 }else{
+                    //TODO: CONTROL DE ERRORES
                     response.errorBody();
                 }
             }
 
             @Override
-            public void onFailure(Call<PhotoResponse> call, Throwable t) {
+            public void onFailure(Call<PhotoLibrary> call, Throwable t) {
+                //TODO: CONTROL DE ERRORES
+
                 t.getCause();
                 t.getMessage();
                 t.getLocalizedMessage();
+
+                photosData.setValue(null);
             }
         });
+
+        return photosData;
     }
 }
