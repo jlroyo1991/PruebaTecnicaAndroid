@@ -1,6 +1,6 @@
-package com.example.pruebatecnicaandroid.api;
+package com.example.pruebatecnicaandroid.data;
 
-import com.example.pruebatecnicaandroid.model.PhotoLibrary;
+import com.example.pruebatecnicaandroid.domain.entities.PhotoLibrary;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

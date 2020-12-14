@@ -1,4 +1,4 @@
-package com.example.pruebatecnicaandroid.api;
+package com.example.pruebatecnicaandroid.data;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;

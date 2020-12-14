@@ -5,8 +5,6 @@
 gradlew,5/b/5bbfa66edb4db3c7c33c5181f43510990d3307f9
 A
 gradle.properties,2/a/2afbb999f001938c88fa43fc2ef52abf0f8213e4
-t
-Dapp/src/main/java/com/example/pruebatecnicaandroid/MainActivity.java,1/f/1ff0fe6c89b12e994102ff19b2e2c032c01d2f94
 @
 app/build.gradle,f/4/f4a01d6a4fcb971362ec00a83903fd3902f52164
 {
@@ -25,3 +23,5 @@ z
 Japp/src/main/java/com/example/pruebatecnicaandroid/model/PhotoLibrary.java,3/f/3f9532e3d7f5d5bde0dd13f333b815f4aac986a6
 €
 Papp/src/main/java/com/example/pruebatecnicaandroid/viewmodel/FlckrViewModel.java,4/2/424d8b174297d9bd51c773ffb8a4b472ab9be207
+y
+Iapp/src/main/java/com/example/pruebatecnicaandroid/view/MainActivity.java,c/3/c371af90abc0b4c50829a86025ac70ad9d373096
