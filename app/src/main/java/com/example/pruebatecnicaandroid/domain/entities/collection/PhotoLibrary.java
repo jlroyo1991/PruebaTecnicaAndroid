@@ -1,5 +1,5 @@
 
-package com.example.pruebatecnicaandroid.domain.entities;
+package com.example.pruebatecnicaandroid.domain.entities.collection;
 
 import com.google.gson.annotations.SerializedName;
 

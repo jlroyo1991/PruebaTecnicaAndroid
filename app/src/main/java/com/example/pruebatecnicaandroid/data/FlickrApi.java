@@ -1,6 +1,7 @@
 package com.example.pruebatecnicaandroid.data;
 
-import com.example.pruebatecnicaandroid.domain.entities.PhotoLibrary;
+import com.example.pruebatecnicaandroid.domain.entities.collection.PhotoLibrary;
+import com.example.pruebatecnicaandroid.domain.entities.detailPhoto.PhotoDetail;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -13,4 +14,12 @@ interface FlickrApi {
                                           @Query("format") String format,
                                           @Query("nojsoncallback") int nojson,
                                           @Query("tags") String tags);
+
+    @GET("rest/")
+    Call<PhotoDetail> getPhotoDetail(@Query("api_key") String apiKey,
+                                     @Query("method") String method,
+                                     @Query("format") String format,
+                                     @Query("nojsoncallback") int nojson,
+                                     @Query("photo_id") String photoId,
+                                     @Query("secret") String secret);
 }

@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 
 import com.bumptech.glide.Glide;
 import com.example.pruebatecnicaandroid.R;
-import com.example.pruebatecnicaandroid.domain.entities.Photo;
+import com.example.pruebatecnicaandroid.domain.entities.collection.Photo;
 
 import java.util.ArrayList;
 
@@ -35,10 +35,9 @@ public class PhotosAdapter extends RecyclerView.Adapter<PhotosAdapter.PhotosView
 
     @Override
     public void onBindViewHolder(@NonNull PhotosAdapter.PhotosViewHolder holder, int position) {
-        holder.title.setText(photos.get(position).getTitle().toString());
+        holder.title.setText(photos.get(position).getTitle());
         holder.autor.setText(photos.get(position).getOwner());
- /*       Picasso.get().load("https://farm" + photos.get(position).getFarm() + ".staticflickr.com/" + photos.get(position).getServer() + '/' + photos.get(position).getId() + '_' + photos.get(position).getSecret() + ".jpg\n").centerCrop().into(holder.image);
-*/
+
         String url = "https://farm" + photos.get(position).getFarm() + ".staticflickr.com/" + photos.get(position).getServer() + '/' + photos.get(position).getId() + '_' + photos.get(position).getSecret() + ".jpg\n";
 
         Glide.with(context)

@@ -10,16 +10,16 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pruebatecnicaandroid.R;
+import com.example.pruebatecnicaandroid.domain.entities.collection.Photo;
+import com.example.pruebatecnicaandroid.domain.entities.collection.PhotosCollection;
+import com.example.pruebatecnicaandroid.presentation.viewmodel.FlckrCollectionViewModel;
 import com.example.pruebatecnicaandroid.presentation.adapter.PhotosAdapter;
-import com.example.pruebatecnicaandroid.domain.entities.Photo;
-import com.example.pruebatecnicaandroid.domain.entities.PhotosCollection;
-import com.example.pruebatecnicaandroid.presentation.viewmodel.FlckrViewModel;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    private FlckrViewModel flckrViewModel;
+    private FlckrCollectionViewModel flckrCollectionViewModel;
     private ArrayList<Photo> photosArrayList = new ArrayList<>();
     private RecyclerView photosRecyclerView;
     private PhotosAdapter photosAdapter;
@@ -35,13 +35,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initViewModel(String query) {
-        flckrViewModel = ViewModelProviders.of(this).get(FlckrViewModel.class);
-        flckrViewModel.init(query);
+        flckrCollectionViewModel = ViewModelProviders.of(this).get(FlckrCollectionViewModel.class);
+        flckrCollectionViewModel.init();
+        flckrCollectionViewModel.requestFotoCollection(query);
         observeViewModel();
     }
 
     private void observeViewModel() {
-        flckrViewModel.getPhotoRepository().observe(this, photoLibrary -> {
+        flckrCollectionViewModel.getPhotoRepository().observe(this, photoLibrary -> {
             PhotosCollection photosCollection = photoLibrary.getPhotos();
             photosArrayList.addAll(photosCollection.getPhoto());
             photosAdapter.notifyDataSetChanged();

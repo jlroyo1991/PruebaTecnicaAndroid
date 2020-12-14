@@ -2,7 +2,9 @@ package com.example.pruebatecnicaandroid.data;
 
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.pruebatecnicaandroid.domain.entities.PhotoLibrary;
+import com.example.pruebatecnicaandroid.domain.entities.collection.Photo;
+import com.example.pruebatecnicaandroid.domain.entities.collection.PhotoLibrary;
+import com.example.pruebatecnicaandroid.domain.entities.detailPhoto.PhotoDetail;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -36,19 +38,36 @@ public class Repository {
                 if (response.isSuccessful()){
                     photosData.setValue(response.body());
                 }else{
-                    //TODO: CONTROL DE ERRORES
                     response.errorBody();
                 }
             }
 
             @Override
             public void onFailure(Call<PhotoLibrary> call, Throwable t) {
-                //TODO: CONTROL DE ERRORES
+                photosData.setValue(null);
+            }
+        });
 
-                t.getCause();
-                t.getMessage();
-                t.getLocalizedMessage();
+        return photosData;
+    }
 
+    public MutableLiveData<PhotoDetail> getDetail(String apiKey, String method, String format, int nojson, String photo_id, String secret){
+
+        MutableLiveData<PhotoDetail> photosData = new MutableLiveData<>();
+
+        flickrApi.getPhotoDetail(apiKey, method, format, nojson, photo_id, secret).enqueue(new Callback<PhotoDetail>() {
+            @Override
+            public void onResponse(Call<PhotoDetail> call,
+                                   Response<PhotoDetail> response) {
+                if (response.isSuccessful()){
+                    photosData.setValue(response.body());
+                }else{
+                    response.errorBody();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<PhotoDetail> call, Throwable t) {
                 photosData.setValue(null);
             }
         });
