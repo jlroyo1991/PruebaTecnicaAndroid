@@ -5,8 +5,10 @@ import retrofit2.http.GET;
 import retrofit2.http.Query;
 
 interface FlickrApi {
-    @GET("getPhotoCollection")
+    @GET("rest/")
     Call<PhotoResponse> getPhotoCollection(@Query("api_key") String apiKey,
-                                           @Query("method") String method);
+                                           @Query("method") String method,
+                                           @Query("format") String format,
+                                           @Query("nojsoncallback") int nojson);
 
 }

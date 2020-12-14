@@ -21,20 +21,25 @@ public class Repository {
         flickrApi = RetrofitService.cteateService(FlickrApi.class);
     }
 
-    public void getCollection(String apiKey, String method){
+    public void getCollection(String apiKey, String method, String format, int nojson){
 
 
-        flickrApi.getPhotoCollection(apiKey, method).enqueue(new Callback<PhotoResponse>() {
+        flickrApi.getPhotoCollection(apiKey, method, format, nojson).enqueue(new Callback<PhotoResponse>() {
             @Override
             public void onResponse(Call<PhotoResponse> call,
                                    Response<PhotoResponse> response) {
                 if (response.isSuccessful()){
                     response.body();
+                }else{
+                    response.errorBody();
                 }
             }
 
             @Override
             public void onFailure(Call<PhotoResponse> call, Throwable t) {
+                t.getCause();
+                t.getMessage();
+                t.getLocalizedMessage();
             }
         });
     }

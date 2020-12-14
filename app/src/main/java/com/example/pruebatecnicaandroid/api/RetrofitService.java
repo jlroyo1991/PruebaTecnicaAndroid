@@ -6,7 +6,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitService {
 
     private static Retrofit retrofit = new Retrofit.Builder()
-            .baseUrl("http://api.flickr.com/services/rest/")
+            .baseUrl("https://api.flickr.com/services/")
             .addConverterFactory(GsonConverterFactory.create())
             .build();
 
