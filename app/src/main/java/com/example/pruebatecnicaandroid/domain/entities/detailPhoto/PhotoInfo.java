@@ -42,8 +42,6 @@ public class PhotoInfo {
     private String mSecret;
     @SerializedName("server")
     private String mServer;
-    @SerializedName("tags")
-    private Tags mTags;
     @SerializedName("title")
     private Title mTitle;
     @SerializedName("urls")
@@ -125,10 +123,6 @@ public class PhotoInfo {
 
     public String getServer() {
         return mServer;
-    }
-
-    public Tags getTags() {
-        return mTags;
     }
 
     public Title getTitle() {

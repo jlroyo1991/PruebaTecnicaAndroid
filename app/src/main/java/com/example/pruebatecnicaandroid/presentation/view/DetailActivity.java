@@ -2,35 +2,30 @@ package com.example.pruebatecnicaandroid.presentation.view;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.QuickContactBadge;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.accessibility.AccessibilityViewCommand;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.bumptech.glide.Glide;
 import com.example.pruebatecnicaandroid.R;
-import com.example.pruebatecnicaandroid.domain.entities.collection.Photo;
-import com.example.pruebatecnicaandroid.domain.entities.collection.PhotosCollection;
-import com.example.pruebatecnicaandroid.domain.entities.detailPhoto.PhotoDetail;
-import com.example.pruebatecnicaandroid.presentation.adapter.PhotosAdapter;
-import com.example.pruebatecnicaandroid.presentation.viewmodel.FlckrCollectionViewModel;
 import com.example.pruebatecnicaandroid.presentation.viewmodel.FlckrDetailViewModel;
-
-import java.sql.SQLOutput;
-
-import javax.inject.Inject;
+import com.example.pruebatecnicaandroid.utils.FormatterUtils;
 
 import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint
 public class DetailActivity extends AppCompatActivity {
 
-    @Inject
-    PhotosAdapter photosAdapter;
     private String idPhoto;
     private String secret;
     private FlckrDetailViewModel flckrDetailViewModel;
+    private TextView userName;
+    private TextView description;
+    private TextView dateUploaded;
+    private TextView title;
+    private ImageView image;
 
 
     @Override
@@ -44,10 +39,11 @@ public class DetailActivity extends AppCompatActivity {
     }
 
     private void initViews() {
-        TextView textView = findViewById(R.id.textView);
-        TextView textView2 = findViewById(R.id.textView2);
-        textView.setText(idPhoto);
-        textView2.setText(secret);
+        userName = findViewById(R.id.username_textview);
+        description = findViewById(R.id.description_textview);
+        dateUploaded = findViewById(R.id.date_uploaded_textview);
+        title = findViewById(R.id.title_textview);
+        image = findViewById(R.id.detail_imageview);
     }
 
     private void getExtras() {
@@ -65,21 +61,15 @@ public class DetailActivity extends AppCompatActivity {
 
     private void observeViewModel() {
         flckrDetailViewModel.getDetailRepository().observe(this, photoDetail -> {
-            PhotoDetail photo = photoDetail;
 
-            //Titulo
-            //Autor
-            //Fecha
-            //Descripcion
-            if (photo != null){
-                System.out.println("USERNAME");
-                System.out.println(photo.getPhoto().getOwner().getUsername());
-                System.out.println("DESCRIPTION");
-                System.out.println(photo.getPhoto().getDescription().get_content());
-                System.out.println("DATE");
-                System.out.println(photo.getPhoto().getDateuploaded());
-                System.out.println("TITLE");
-                System.out.println(photo.getPhoto().getTitle());
+            if (photoDetail != null){
+                String url = FormatterUtils.formatUrl(photoDetail.getPhoto().getFarm(), photoDetail.getPhoto().getServer(), photoDetail.getPhoto().getId(),  photoDetail.getPhoto().getSecret());
+
+                Glide.with(this).load(url).centerCrop().into(image);
+                userName.setText(photoDetail.getPhoto().getOwner().getUsername());
+                description.setText(photoDetail.getPhoto().getDescription().get_content());
+                dateUploaded.setText(photoDetail.getPhoto().getDateuploaded());
+                title.setText(photoDetail.getPhoto().getTitle().get_content());
             }
         });
     }

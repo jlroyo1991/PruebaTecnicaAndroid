@@ -94,10 +94,10 @@ public class SearchActivity extends AppCompatActivity implements ListItemClickLi
 
 
     @Override
-    public void onListItemClick(String id, String secret) {
+    public void onListItemClick(int position) {
         Intent intent = new Intent(this, DetailActivity.class);
-        intent.putExtra(SECRET, secret);
-        intent.putExtra(PHOTOID, id);
+        intent.putExtra(SECRET, photosArrayList.get(position).getSecret());
+        intent.putExtra(PHOTOID, photosArrayList.get(position).getId());
         startActivity(intent);
     }
 }

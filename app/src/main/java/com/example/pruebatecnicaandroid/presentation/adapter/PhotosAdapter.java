@@ -62,10 +62,6 @@ public class PhotosAdapter extends RecyclerView.Adapter<PhotosAdapter.PhotosView
         this.listItemClickListener = listItemClickListener;
     }
 
-    public Photo getSelectedPhoto(){
-        return photos.get(position);
-    }
-
 
     public class PhotosViewHolder extends RecyclerView.ViewHolder{
 
@@ -79,7 +75,8 @@ public class PhotosAdapter extends RecyclerView.Adapter<PhotosAdapter.PhotosView
             title = itemView.findViewById(R.id.title);
             autor = itemView.findViewById(R.id.autor);
             image = itemView.findViewById(R.id.imageView);
-            itemView.setOnClickListener(view -> listItemClickListener.onListItemClick(getSelectedPhoto().getId(), getSelectedPhoto().getSecret()));
+
+            itemView.setOnClickListener(view -> listItemClickListener.onListItemClick(getAdapterPosition()));
         }
     }
 }

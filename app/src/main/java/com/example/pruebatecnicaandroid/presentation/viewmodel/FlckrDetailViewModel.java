@@ -25,5 +25,4 @@ public class FlckrDetailViewModel extends ViewModel {
     public void photoDetailMutableLiveData(String photoId, String secret){
         photoDetailMutableLiveData = repository.getDetail("35705637fdd6a170f36b1c35fe916017", "flickr.photos.getInfo", "json", 1, photoId, secret);
     }
-
 }
