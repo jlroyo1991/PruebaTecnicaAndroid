@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import com.bumptech.glide.Glide;
 import com.example.pruebatecnicaandroid.R;
 import com.example.pruebatecnicaandroid.domain.entities.collection.Photo;
+import com.example.pruebatecnicaandroid.utils.FormatterUtils;
 
 import java.util.ArrayList;
 
@@ -23,7 +24,7 @@ import dagger.hilt.android.qualifiers.ActivityContext;
 public class PhotosAdapter extends RecyclerView.Adapter<PhotosAdapter.PhotosViewHolder> {
 
     private ArrayList<Photo> photos;
-    Context context;
+    private Context context;
 
     @Inject
     public PhotosAdapter(@ActivityContext Context context) {
@@ -41,13 +42,11 @@ public class PhotosAdapter extends RecyclerView.Adapter<PhotosAdapter.PhotosView
     public void onBindViewHolder(@NonNull PhotosAdapter.PhotosViewHolder holder, int position) {
         holder.title.setText(photos.get(position).getTitle());
         holder.autor.setText(photos.get(position).getOwner());
+        String url = FormatterUtils.formatUrl(photos.get(position).getFarm(), photos.get(position).getServer(), photos.get(position).getId(),  photos.get(position).getSecret());
+        Glide.with(context).load(url).centerCrop().into(holder.image);
+    }
 
-        String url = "https://farm" + photos.get(position).getFarm() + ".staticflickr.com/" + photos.get(position).getServer() + '/' + photos.get(position).getId() + '_' + photos.get(position).getSecret() + ".jpg\n";
-
-        Glide.with(context)
-                .load(url)
-                .centerCrop()
-                .into(holder.image);
+    private void initImageView() {
     }
 
     @Override

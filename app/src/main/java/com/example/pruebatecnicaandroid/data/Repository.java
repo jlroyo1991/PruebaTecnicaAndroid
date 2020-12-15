@@ -2,7 +2,6 @@ package com.example.pruebatecnicaandroid.data;
 
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.pruebatecnicaandroid.domain.entities.collection.Photo;
 import com.example.pruebatecnicaandroid.domain.entities.collection.PhotoLibrary;
 import com.example.pruebatecnicaandroid.domain.entities.detailPhoto.PhotoDetail;
 
@@ -24,7 +23,7 @@ public class Repository {
     private FlickrApi flickrApi;
 
     public Repository(){
-        flickrApi = RetrofitService.cteateService(FlickrApi.class);
+        flickrApi = RetrofitService.createService(FlickrApi.class);
     }
 
     public MutableLiveData<PhotoLibrary> getCollection(String apiKey, String method, String format, int nojson, String tags){
