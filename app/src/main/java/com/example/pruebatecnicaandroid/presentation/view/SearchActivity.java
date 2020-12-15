@@ -1,0 +1,119 @@
+package com.example.pruebatecnicaandroid.presentation.view;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.pruebatecnicaandroid.R;
+import com.example.pruebatecnicaandroid.domain.entities.collection.Photo;
+import com.example.pruebatecnicaandroid.domain.entities.collection.PhotosCollection;
+import com.example.pruebatecnicaandroid.presentation.adapter.ListItemClickListener;
+import com.example.pruebatecnicaandroid.presentation.adapter.PhotosAdapter;
+import com.example.pruebatecnicaandroid.presentation.viewmodel.FlckrCollectionViewModel;
+import com.example.pruebatecnicaandroid.utils.FormatterUtils;
+
+import java.util.ArrayList;
+
+import javax.inject.Inject;
+
+import dagger.hilt.android.AndroidEntryPoint;
+
+@AndroidEntryPoint
+public class SearchActivity extends AppCompatActivity implements ListItemClickListener {
+
+    private static final String SECRET = "SECRET";
+    private static final String PHOTOID = "PHOTOID";
+    private static final String Title = "Detalle";
+    private FlckrCollectionViewModel flckrCollectionViewModel;
+    private ArrayList<Photo> photosArrayList = new ArrayList<>();
+    private RecyclerView photosRecyclerView;
+    private SearchView simpleSearchView;
+    private ImageView noResultsImageView;
+
+    @Inject
+    PhotosAdapter photosAdapter;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        initViews();
+        initSearchViewListener();
+        setupRecyclerView();
+    }
+
+    private void initViewModel(String query) {
+        flckrCollectionViewModel = ViewModelProviders.of(this).get(FlckrCollectionViewModel.class);
+        flckrCollectionViewModel.init();
+        flckrCollectionViewModel.requestFotoCollection(query);
+        observeViewModel();
+    }
+
+    private void observeViewModel() {
+        flckrCollectionViewModel.getPhotoRepository().observe(this, photoLibrary -> {
+            PhotosCollection photosCollection = photoLibrary.getPhotos();
+            photosArrayList.addAll(photosCollection.getPhoto());
+            photosAdapter.notifyDataSetChanged();
+            setNoResultsIfNeeded(photosArrayList);
+        });
+    }
+
+    private void setNoResultsIfNeeded(ArrayList<Photo> photosArrayList) {
+        if(photosArrayList.size() == 0){
+            noResultsImageView.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void initViews() {
+        photosRecyclerView = findViewById(R.id.photos_list);
+        noResultsImageView = findViewById(R.id.no_results_image_view);
+        simpleSearchView = findViewById(R.id.photos_search_view);
+        simpleSearchView.setQueryHint(getString(R.string.search_string));
+        simpleSearchView.setIconified(false);
+
+    }
+
+    private void initSearchViewListener() {
+        simpleSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                photosArrayList.clear();
+                noResultsImageView.setVisibility(View.GONE);
+                initViewModel(FormatterUtils.parseTags(query));
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+
+    }
+
+    private void setupRecyclerView() {
+        photosAdapter.setPhotos(photosArrayList);
+        photosAdapter.setListItemClickListener(this);
+        photosRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+        photosRecyclerView.setAdapter(photosAdapter);
+        photosRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        photosRecyclerView.setNestedScrollingEnabled(true);
+    }
+
+
+    @Override
+    public void onListItemClick(int position) {
+        Intent intent = new Intent(this, DetailActivity.class);
+        intent.putExtra(SECRET, photosArrayList.get(position).getSecret());
+        intent.putExtra(PHOTOID, photosArrayList.get(position).getId());
+        startActivity(intent);
+    }
+}
