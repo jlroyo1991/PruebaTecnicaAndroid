@@ -2,12 +2,14 @@ package com.example.pruebatecnicaandroid.presentation.view;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pruebatecnicaandroid.R;
@@ -33,6 +35,7 @@ public class SearchActivity extends AppCompatActivity implements ListItemClickLi
     private ArrayList<Photo> photosArrayList = new ArrayList<>();
     private RecyclerView photosRecyclerView;
     private SearchView simpleSearchView;
+    private ImageView noResultsImageView;
 
     @Inject
     PhotosAdapter photosAdapter;
@@ -58,11 +61,19 @@ public class SearchActivity extends AppCompatActivity implements ListItemClickLi
             PhotosCollection photosCollection = photoLibrary.getPhotos();
             photosArrayList.addAll(photosCollection.getPhoto());
             photosAdapter.notifyDataSetChanged();
+            setNoResultsIfNeeded(photosArrayList);
         });
+    }
+
+    private void setNoResultsIfNeeded(ArrayList<Photo> photosArrayList) {
+        if(photosArrayList.size() == 0){
+            noResultsImageView.setVisibility(View.VISIBLE);
+        }
     }
 
     private void initViews() {
         photosRecyclerView = findViewById(R.id.photos_list);
+        noResultsImageView = findViewById(R.id.no_results_imageView);
         simpleSearchView = findViewById(R.id.photos_search_view);
         simpleSearchView.setQueryHint(getString(R.string.search_string));
         simpleSearchView.setIconified(false);
@@ -74,6 +85,7 @@ public class SearchActivity extends AppCompatActivity implements ListItemClickLi
             @Override
             public boolean onQueryTextSubmit(String query) {
                 photosArrayList.clear();
+                noResultsImageView.setVisibility(View.GONE);
                 initViewModel(query);
                 return false;
             }
@@ -89,7 +101,7 @@ public class SearchActivity extends AppCompatActivity implements ListItemClickLi
     private void setupRecyclerView() {
         photosAdapter.setPhotos(photosArrayList);
         photosAdapter.setListItemClickListener(this);
-        photosRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        photosRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         photosRecyclerView.setAdapter(photosAdapter);
         photosRecyclerView.setItemAnimator(new DefaultItemAnimator());
         photosRecyclerView.setNestedScrollingEnabled(true);

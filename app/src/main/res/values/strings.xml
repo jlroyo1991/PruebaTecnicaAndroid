@@ -2,4 +2,8 @@
     <string name="app_name">PruebaTecnicaAndroid</string>
     <string name="detail_string">Detail</string>
     <string name="search_string">Search images...</string>
+    <string name="title_string">Title</string>
+    <string name="description_string">Description</string>
+    <string name="date_string">Date</string>
+    <string name="author_string">Author</string>
 </resources>
