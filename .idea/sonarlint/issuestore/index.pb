@@ -59,3 +59,5 @@ Vapp/src/main/java/com/example/pruebatecnicaandroid/presentation/view/MainActivi
 Zapp/src/main/java/com/example/pruebatecnicaandroid/presentation/adapter/PhotosAdapter.java,8/2/825b5518710937ebdeb0c99280db95869a9bc0ac
 —
 gapp/src/main/java/com/example/pruebatecnicaandroid/presentation/viewmodel/FlckrCollectionViewModel.java,c/3/c37ade7b50a0f143fc94f933f5001f1e394ce796
+>
+app/.gitignore,5/1/51e1c5d383dfaa35e0e7e5873a0a99355a86880f
