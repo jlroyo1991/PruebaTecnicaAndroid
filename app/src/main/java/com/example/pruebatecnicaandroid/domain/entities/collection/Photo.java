@@ -1,7 +1,15 @@
 
 package com.example.pruebatecnicaandroid.domain.entities.collection;
 
+import android.content.Context;
+
 import com.google.gson.annotations.SerializedName;
+
+import java.util.ArrayList;
+
+import javax.inject.Inject;
+
+import dagger.hilt.android.qualifiers.ActivityContext;
 
 public class Photo {
 

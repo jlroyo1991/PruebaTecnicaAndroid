@@ -17,13 +17,20 @@ import com.example.pruebatecnicaandroid.presentation.adapter.PhotosAdapter;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+import javax.inject.Inject;
+
+import dagger.hilt.android.AndroidEntryPoint;
+
+@AndroidEntryPoint
+public class SearchActivity extends AppCompatActivity {
 
     private FlckrCollectionViewModel flckrCollectionViewModel;
     private ArrayList<Photo> photosArrayList = new ArrayList<>();
     private RecyclerView photosRecyclerView;
-    private PhotosAdapter photosAdapter;
     private SearchView simpleSearchView;
+
+    @Inject
+    PhotosAdapter photosAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,12 +79,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupRecyclerView() {
-        if (photosAdapter == null) {
-            photosAdapter = new PhotosAdapter(MainActivity.this, photosArrayList);
+            photosAdapter.setPhotos(photosArrayList);
             photosRecyclerView.setLayoutManager(new LinearLayoutManager(this));
             photosRecyclerView.setAdapter(photosAdapter);
             photosRecyclerView.setItemAnimator(new DefaultItemAnimator());
             photosRecyclerView.setNestedScrollingEnabled(true);
-        }
     }
 }

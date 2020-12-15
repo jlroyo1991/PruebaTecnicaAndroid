@@ -16,14 +16,18 @@ import com.example.pruebatecnicaandroid.domain.entities.collection.Photo;
 
 import java.util.ArrayList;
 
+import javax.inject.Inject;
+
+import dagger.hilt.android.qualifiers.ActivityContext;
+
 public class PhotosAdapter extends RecyclerView.Adapter<PhotosAdapter.PhotosViewHolder> {
 
-    private final ArrayList<Photo> photos;
+    private ArrayList<Photo> photos;
     Context context;
 
-    public PhotosAdapter(Context context, ArrayList<Photo> photos) {
+    @Inject
+    public PhotosAdapter(@ActivityContext Context context) {
         this.context = context;
-        this.photos = photos;
     }
 
     @NonNull
@@ -49,6 +53,10 @@ public class PhotosAdapter extends RecyclerView.Adapter<PhotosAdapter.PhotosView
     @Override
     public int getItemCount() {
         return photos.size();
+    }
+
+    public void setPhotos(ArrayList<Photo> photos) {
+        this.photos = photos;
     }
 
     public static class PhotosViewHolder extends RecyclerView.ViewHolder{
