@@ -23,4 +23,14 @@ public final class FormatterUtils {
         String date = DateFormat.format("dd-MM-yyyy", cal).toString();
         return date;
     }
+
+    public static String parseTags(String tag){
+        String[] splited = tag.split("\\s+");
+        String output = "";
+
+        for (String strTemp: splited) {
+            output = (output + strTemp + ", ");
+        }
+        return output;
+    }
 }

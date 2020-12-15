@@ -18,6 +18,7 @@ import com.example.pruebatecnicaandroid.domain.entities.collection.PhotosCollect
 import com.example.pruebatecnicaandroid.presentation.adapter.ListItemClickListener;
 import com.example.pruebatecnicaandroid.presentation.adapter.PhotosAdapter;
 import com.example.pruebatecnicaandroid.presentation.viewmodel.FlckrCollectionViewModel;
+import com.example.pruebatecnicaandroid.utils.FormatterUtils;
 
 import java.util.ArrayList;
 
@@ -73,7 +74,7 @@ public class SearchActivity extends AppCompatActivity implements ListItemClickLi
 
     private void initViews() {
         photosRecyclerView = findViewById(R.id.photos_list);
-        noResultsImageView = findViewById(R.id.no_results_imageView);
+        noResultsImageView = findViewById(R.id.no_results_image_view);
         simpleSearchView = findViewById(R.id.photos_search_view);
         simpleSearchView.setQueryHint(getString(R.string.search_string));
         simpleSearchView.setIconified(false);
@@ -86,7 +87,7 @@ public class SearchActivity extends AppCompatActivity implements ListItemClickLi
             public boolean onQueryTextSubmit(String query) {
                 photosArrayList.clear();
                 noResultsImageView.setVisibility(View.GONE);
-                initViewModel(query);
+                initViewModel(FormatterUtils.parseTags(query));
                 return false;
             }
 
