@@ -6,9 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import androidx.recyclerview.widget.RecyclerView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.pruebatecnicaandroid.R;
@@ -21,10 +21,12 @@ import javax.inject.Inject;
 
 import dagger.hilt.android.qualifiers.ActivityContext;
 
-public class PhotosAdapter extends RecyclerView.Adapter<PhotosAdapter.PhotosViewHolder> {
+public class PhotosAdapter extends RecyclerView.Adapter<PhotosAdapter.PhotosViewHolder>  {
 
     private ArrayList<Photo> photos;
     private Context context;
+    private int position;
+    private ListItemClickListener listItemClickListener;
 
     @Inject
     public PhotosAdapter(@ActivityContext Context context) {
@@ -40,13 +42,11 @@ public class PhotosAdapter extends RecyclerView.Adapter<PhotosAdapter.PhotosView
 
     @Override
     public void onBindViewHolder(@NonNull PhotosAdapter.PhotosViewHolder holder, int position) {
+        this.position = position;
         holder.title.setText(photos.get(position).getTitle());
         holder.autor.setText(photos.get(position).getOwner());
         String url = FormatterUtils.formatUrl(photos.get(position).getFarm(), photos.get(position).getServer(), photos.get(position).getId(),  photos.get(position).getSecret());
         Glide.with(context).load(url).centerCrop().into(holder.image);
-    }
-
-    private void initImageView() {
     }
 
     @Override
@@ -58,7 +58,16 @@ public class PhotosAdapter extends RecyclerView.Adapter<PhotosAdapter.PhotosView
         this.photos = photos;
     }
 
-    public static class PhotosViewHolder extends RecyclerView.ViewHolder{
+    public void setListItemClickListener(ListItemClickListener listItemClickListener){
+        this.listItemClickListener = listItemClickListener;
+    }
+
+    public Photo getSelectedPhoto(){
+        return photos.get(position);
+    }
+
+
+    public class PhotosViewHolder extends RecyclerView.ViewHolder{
 
         TextView title;
         TextView autor;
@@ -70,7 +79,7 @@ public class PhotosAdapter extends RecyclerView.Adapter<PhotosAdapter.PhotosView
             title = itemView.findViewById(R.id.title);
             autor = itemView.findViewById(R.id.autor);
             image = itemView.findViewById(R.id.imageView);
-
+            itemView.setOnClickListener(view -> listItemClickListener.onListItemClick(getSelectedPhoto().getId(), getSelectedPhoto().getSecret()));
         }
     }
 }

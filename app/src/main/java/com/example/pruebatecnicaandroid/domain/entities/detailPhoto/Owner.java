@@ -1,9 +1,11 @@
 
 package com.example.pruebatecnicaandroid.domain.entities.detailPhoto;
 
+import javax.annotation.Generated;
 import com.google.gson.annotations.SerializedName;
 
-
+@Generated("net.hexar.json2pojo")
+@SuppressWarnings("unused")
 public class Owner {
 
     @SerializedName("iconfarm")
@@ -25,56 +27,87 @@ public class Owner {
         return mIconfarm;
     }
 
-    public void setIconfarm(Long iconfarm) {
-        mIconfarm = iconfarm;
-    }
-
     public String getIconserver() {
         return mIconserver;
-    }
-
-    public void setIconserver(String iconserver) {
-        mIconserver = iconserver;
     }
 
     public String getLocation() {
         return mLocation;
     }
 
-    public void setLocation(String location) {
-        mLocation = location;
-    }
-
     public String getNsid() {
         return mNsid;
-    }
-
-    public void setNsid(String nsid) {
-        mNsid = nsid;
     }
 
     public Object getPathAlias() {
         return mPathAlias;
     }
 
-    public void setPathAlias(Object pathAlias) {
-        mPathAlias = pathAlias;
-    }
-
     public String getRealname() {
         return mRealname;
-    }
-
-    public void setRealname(String realname) {
-        mRealname = realname;
     }
 
     public String getUsername() {
         return mUsername;
     }
 
-    public void setUsername(String username) {
-        mUsername = username;
+    public static class Builder {
+
+        private Long mIconfarm;
+        private String mIconserver;
+        private String mLocation;
+        private String mNsid;
+        private Object mPathAlias;
+        private String mRealname;
+        private String mUsername;
+
+        public Owner.Builder withIconfarm(Long iconfarm) {
+            mIconfarm = iconfarm;
+            return this;
+        }
+
+        public Owner.Builder withIconserver(String iconserver) {
+            mIconserver = iconserver;
+            return this;
+        }
+
+        public Owner.Builder withLocation(String location) {
+            mLocation = location;
+            return this;
+        }
+
+        public Owner.Builder withNsid(String nsid) {
+            mNsid = nsid;
+            return this;
+        }
+
+        public Owner.Builder withPathAlias(Object pathAlias) {
+            mPathAlias = pathAlias;
+            return this;
+        }
+
+        public Owner.Builder withRealname(String realname) {
+            mRealname = realname;
+            return this;
+        }
+
+        public Owner.Builder withUsername(String username) {
+            mUsername = username;
+            return this;
+        }
+
+        public Owner build() {
+            Owner owner = new Owner();
+            owner.mIconfarm = mIconfarm;
+            owner.mIconserver = mIconserver;
+            owner.mLocation = mLocation;
+            owner.mNsid = mNsid;
+            owner.mPathAlias = mPathAlias;
+            owner.mRealname = mRealname;
+            owner.mUsername = mUsername;
+            return owner;
+        }
+
     }
 
 }

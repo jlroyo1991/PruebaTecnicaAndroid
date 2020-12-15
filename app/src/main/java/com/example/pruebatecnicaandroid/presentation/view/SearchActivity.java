@@ -1,6 +1,8 @@
 package com.example.pruebatecnicaandroid.presentation.view;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
@@ -12,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.pruebatecnicaandroid.R;
 import com.example.pruebatecnicaandroid.domain.entities.collection.Photo;
 import com.example.pruebatecnicaandroid.domain.entities.collection.PhotosCollection;
+import com.example.pruebatecnicaandroid.presentation.adapter.ListItemClickListener;
 import com.example.pruebatecnicaandroid.presentation.viewmodel.FlckrCollectionViewModel;
 import com.example.pruebatecnicaandroid.presentation.adapter.PhotosAdapter;
 
@@ -22,8 +25,10 @@ import javax.inject.Inject;
 import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint
-public class SearchActivity extends AppCompatActivity {
+public class SearchActivity extends AppCompatActivity implements ListItemClickListener {
 
+    private static final String SECRET = "SECRET";
+    private static final String PHOTOID = "PHOTOID";
     private FlckrCollectionViewModel flckrCollectionViewModel;
     private ArrayList<Photo> photosArrayList = new ArrayList<>();
     private RecyclerView photosRecyclerView;
@@ -79,10 +84,20 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     private void setupRecyclerView() {
-            photosAdapter.setPhotos(photosArrayList);
-            photosRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-            photosRecyclerView.setAdapter(photosAdapter);
-            photosRecyclerView.setItemAnimator(new DefaultItemAnimator());
-            photosRecyclerView.setNestedScrollingEnabled(true);
+        photosAdapter.setPhotos(photosArrayList);
+        photosAdapter.setListItemClickListener(this);
+        photosRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        photosRecyclerView.setAdapter(photosAdapter);
+        photosRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        photosRecyclerView.setNestedScrollingEnabled(true);
+    }
+
+
+    @Override
+    public void onListItemClick(String id, String secret) {
+        Intent intent = new Intent(this, DetailActivity.class);
+        intent.putExtra(SECRET, secret);
+        intent.putExtra(PHOTOID, id);
+        startActivity(intent);
     }
 }

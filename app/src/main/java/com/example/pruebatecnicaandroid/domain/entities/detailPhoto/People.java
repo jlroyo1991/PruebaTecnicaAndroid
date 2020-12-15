@@ -1,9 +1,11 @@
 
 package com.example.pruebatecnicaandroid.domain.entities.detailPhoto;
 
+import javax.annotation.Generated;
 import com.google.gson.annotations.SerializedName;
 
-
+@Generated("net.hexar.json2pojo")
+@SuppressWarnings("unused")
 public class People {
 
     @SerializedName("haspeople")
@@ -13,8 +15,21 @@ public class People {
         return mHaspeople;
     }
 
-    public void setHaspeople(Long haspeople) {
-        mHaspeople = haspeople;
+    public static class Builder {
+
+        private Long mHaspeople;
+
+        public People.Builder withHaspeople(Long haspeople) {
+            mHaspeople = haspeople;
+            return this;
+        }
+
+        public People build() {
+            People people = new People();
+            people.mHaspeople = mHaspeople;
+            return people;
+        }
+
     }
 
 }

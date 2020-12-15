@@ -1,9 +1,11 @@
 
 package com.example.pruebatecnicaandroid.domain.entities.detailPhoto;
 
+import javax.annotation.Generated;
 import com.google.gson.annotations.SerializedName;
 
-
+@Generated("net.hexar.json2pojo")
+@SuppressWarnings("unused")
 public class Usage {
 
     @SerializedName("canblog")
@@ -19,32 +21,54 @@ public class Usage {
         return mCanblog;
     }
 
-    public void setCanblog(Long canblog) {
-        mCanblog = canblog;
-    }
-
     public Long getCandownload() {
         return mCandownload;
-    }
-
-    public void setCandownload(Long candownload) {
-        mCandownload = candownload;
     }
 
     public Long getCanprint() {
         return mCanprint;
     }
 
-    public void setCanprint(Long canprint) {
-        mCanprint = canprint;
-    }
-
     public Long getCanshare() {
         return mCanshare;
     }
 
-    public void setCanshare(Long canshare) {
-        mCanshare = canshare;
+    public static class Builder {
+
+        private Long mCanblog;
+        private Long mCandownload;
+        private Long mCanprint;
+        private Long mCanshare;
+
+        public Usage.Builder withCanblog(Long canblog) {
+            mCanblog = canblog;
+            return this;
+        }
+
+        public Usage.Builder withCandownload(Long candownload) {
+            mCandownload = candownload;
+            return this;
+        }
+
+        public Usage.Builder withCanprint(Long canprint) {
+            mCanprint = canprint;
+            return this;
+        }
+
+        public Usage.Builder withCanshare(Long canshare) {
+            mCanshare = canshare;
+            return this;
+        }
+
+        public Usage build() {
+            Usage usage = new Usage();
+            usage.mCanblog = mCanblog;
+            usage.mCandownload = mCandownload;
+            usage.mCanprint = mCanprint;
+            usage.mCanshare = mCanshare;
+            return usage;
+        }
+
     }
 
 }

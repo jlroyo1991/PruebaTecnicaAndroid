@@ -1,9 +1,11 @@
 
 package com.example.pruebatecnicaandroid.domain.entities.detailPhoto;
 
+import javax.annotation.Generated;
 import com.google.gson.annotations.SerializedName;
 
-
+@Generated("net.hexar.json2pojo")
+@SuppressWarnings("unused")
 public class Title {
 
     @SerializedName("_content")
@@ -13,8 +15,21 @@ public class Title {
         return m_content;
     }
 
-    public void set_content(String _content) {
-        m_content = _content;
+    public static class Builder {
+
+        private String m_content;
+
+        public Title.Builder with_content(String _content) {
+            m_content = _content;
+            return this;
+        }
+
+        public Title build() {
+            Title title = new Title();
+            title.m_content = m_content;
+            return title;
+        }
+
     }
 
 }

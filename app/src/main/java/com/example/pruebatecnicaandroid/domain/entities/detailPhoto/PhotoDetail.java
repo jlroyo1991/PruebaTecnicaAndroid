@@ -9,15 +9,15 @@ import com.google.gson.annotations.SerializedName;
 public class PhotoDetail {
 
     @SerializedName("photo")
-    private Photo mPhoto;
+    private PhotoInfo mPhoto;
     @SerializedName("stat")
     private String mStat;
 
-    public Photo getPhoto() {
+    public PhotoInfo getPhoto() {
         return mPhoto;
     }
 
-    public void setPhoto(Photo photo) {
+    public void setPhoto(PhotoInfo photo) {
         mPhoto = photo;
     }
 

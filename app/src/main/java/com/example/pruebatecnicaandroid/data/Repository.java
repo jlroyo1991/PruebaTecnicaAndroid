@@ -68,6 +68,9 @@ public class Repository {
             @Override
             public void onFailure(Call<PhotoDetail> call, Throwable t) {
                 photosData.setValue(null);
+                t.getLocalizedMessage();
+                t.getMessage();
+                t.getCause();
             }
         });
 

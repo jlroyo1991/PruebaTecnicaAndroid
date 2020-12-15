@@ -53,8 +53,6 @@ w
 Gapp/src/main/java/com/example/pruebatecnicaandroid/data/Repository.java,2/9/29858c3b6ebe6c52ddf408712d096dfe58903d00
 “
 capp/src/main/java/com/example/pruebatecnicaandroid/presentation/viewmodel/FlckrDetailViewModel.java,f/4/f456bdb20359e54f20a70938018dbc7a3bff2c23
-†
-Vapp/src/main/java/com/example/pruebatecnicaandroid/presentation/view/MainActivity.java,b/7/b79579d0ea3a12b4045b312ade91d13465380647
 Š
 Zapp/src/main/java/com/example/pruebatecnicaandroid/presentation/adapter/PhotosAdapter.java,8/2/825b5518710937ebdeb0c99280db95869a9bc0ac
 —

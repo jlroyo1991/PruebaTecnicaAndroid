@@ -2,6 +2,7 @@
 package com.example.pruebatecnicaandroid.domain.entities.detailPhoto;
 
 import java.util.List;
+import javax.annotation.Generated;
 import com.google.gson.annotations.SerializedName;
 
 
@@ -14,8 +15,5 @@ public class Tags {
         return mTag;
     }
 
-    public void setTag(List<Tag> tag) {
-        mTag = tag;
-    }
 
 }

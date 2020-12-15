@@ -1,8 +1,11 @@
 
 package com.example.pruebatecnicaandroid.domain.entities.detailPhoto;
 
+import javax.annotation.Generated;
 import com.google.gson.annotations.SerializedName;
 
+@Generated("net.hexar.json2pojo")
+@SuppressWarnings("unused")
 public class Comments {
 
     @SerializedName("_content")
@@ -12,8 +15,21 @@ public class Comments {
         return m_content;
     }
 
-    public void set_content(String _content) {
-        m_content = _content;
+    public static class Builder {
+
+        private String m_content;
+
+        public Comments.Builder with_content(String _content) {
+            m_content = _content;
+            return this;
+        }
+
+        public Comments build() {
+            Comments comments = new Comments();
+            comments.m_content = m_content;
+            return comments;
+        }
+
     }
 
 }

@@ -1,9 +1,11 @@
 
 package com.example.pruebatecnicaandroid.domain.entities.detailPhoto;
 
+import javax.annotation.Generated;
 import com.google.gson.annotations.SerializedName;
 
-
+@Generated("net.hexar.json2pojo")
+@SuppressWarnings("unused")
 public class Publiceditability {
 
     @SerializedName("canaddmeta")
@@ -15,16 +17,32 @@ public class Publiceditability {
         return mCanaddmeta;
     }
 
-    public void setCanaddmeta(Long canaddmeta) {
-        mCanaddmeta = canaddmeta;
-    }
-
     public Long getCancomment() {
         return mCancomment;
     }
 
-    public void setCancomment(Long cancomment) {
-        mCancomment = cancomment;
+    public static class Builder {
+
+        private Long mCanaddmeta;
+        private Long mCancomment;
+
+        public Publiceditability.Builder withCanaddmeta(Long canaddmeta) {
+            mCanaddmeta = canaddmeta;
+            return this;
+        }
+
+        public Publiceditability.Builder withCancomment(Long cancomment) {
+            mCancomment = cancomment;
+            return this;
+        }
+
+        public Publiceditability build() {
+            Publiceditability publiceditability = new Publiceditability();
+            publiceditability.mCanaddmeta = mCanaddmeta;
+            publiceditability.mCancomment = mCancomment;
+            return publiceditability;
+        }
+
     }
 
 }
