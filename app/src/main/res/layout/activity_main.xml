@@ -8,6 +8,7 @@
     tools:context=".presentation.view.SearchActivity"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
+
     <androidx.appcompat.widget.SearchView
         android:id="@+id/photos_search_view"
         android:layout_width="match_parent"

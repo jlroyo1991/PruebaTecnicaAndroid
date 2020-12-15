@@ -2,10 +2,12 @@ package com.example.pruebatecnicaandroid.presentation.view;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.bumptech.glide.Glide;
@@ -35,7 +37,17 @@ public class DetailActivity extends AppCompatActivity {
 
         getExtras();
         initViews();
+        initToolbar();
         initViewModel();
+    }
+
+
+    private void initToolbar() {
+        Toolbar myToolbar = findViewById(R.id.detail_toolbar);
+        setSupportActionBar(myToolbar);
+        getSupportActionBar().setTitle(getString(R.string.detail_string));
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        myToolbar.setNavigationOnClickListener(v -> onBackPressed());
     }
 
     private void initViews() {

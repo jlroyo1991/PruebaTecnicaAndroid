@@ -2,7 +2,6 @@ package com.example.pruebatecnicaandroid.presentation.view;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
@@ -15,8 +14,8 @@ import com.example.pruebatecnicaandroid.R;
 import com.example.pruebatecnicaandroid.domain.entities.collection.Photo;
 import com.example.pruebatecnicaandroid.domain.entities.collection.PhotosCollection;
 import com.example.pruebatecnicaandroid.presentation.adapter.ListItemClickListener;
-import com.example.pruebatecnicaandroid.presentation.viewmodel.FlckrCollectionViewModel;
 import com.example.pruebatecnicaandroid.presentation.adapter.PhotosAdapter;
+import com.example.pruebatecnicaandroid.presentation.viewmodel.FlckrCollectionViewModel;
 
 import java.util.ArrayList;
 
@@ -29,6 +28,7 @@ public class SearchActivity extends AppCompatActivity implements ListItemClickLi
 
     private static final String SECRET = "SECRET";
     private static final String PHOTOID = "PHOTOID";
+    private static final String Title = "Detalle";
     private FlckrCollectionViewModel flckrCollectionViewModel;
     private ArrayList<Photo> photosArrayList = new ArrayList<>();
     private RecyclerView photosRecyclerView;
@@ -64,6 +64,9 @@ public class SearchActivity extends AppCompatActivity implements ListItemClickLi
     private void initViews() {
         photosRecyclerView = findViewById(R.id.photos_list);
         simpleSearchView = findViewById(R.id.photos_search_view);
+        simpleSearchView.setQueryHint(getString(R.string.search_string));
+        simpleSearchView.setIconified(false);
+
     }
 
     private void initSearchViewListener() {
