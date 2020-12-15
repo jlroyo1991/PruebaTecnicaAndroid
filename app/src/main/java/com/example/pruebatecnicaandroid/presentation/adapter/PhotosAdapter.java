@@ -21,16 +21,16 @@ public class PhotosAdapter extends RecyclerView.Adapter<PhotosAdapter.PhotosView
     private final ArrayList<Photo> photos;
     Context context;
 
-    public PhotosAdapter(Context context, ArrayList<Photo> articles) {
+    public PhotosAdapter(Context context, ArrayList<Photo> photos) {
         this.context = context;
-        this.photos = articles;
+        this.photos = photos;
     }
 
     @NonNull
     @Override
     public PhotosAdapter.PhotosViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.photo_item, parent, false);
-        return new  PhotosViewHolder(view);
+        return new PhotosViewHolder(view);
     }
 
     @Override
@@ -51,7 +51,7 @@ public class PhotosAdapter extends RecyclerView.Adapter<PhotosAdapter.PhotosView
         return photos.size();
     }
 
-    public class PhotosViewHolder extends RecyclerView.ViewHolder{
+    public static class PhotosViewHolder extends RecyclerView.ViewHolder{
 
         TextView title;
         TextView autor;
